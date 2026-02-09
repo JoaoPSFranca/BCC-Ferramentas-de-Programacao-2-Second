@@ -1,0 +1,16 @@
+header {
+    background-color: rgb(40, 159, 42);
+    color: whitesmoke;
+}
+
+h1 {
+    color: white;
+}
+
+#article1 {
+    font-size: 12px;
+
+    h1 {
+        color: black;
+    }
+}
