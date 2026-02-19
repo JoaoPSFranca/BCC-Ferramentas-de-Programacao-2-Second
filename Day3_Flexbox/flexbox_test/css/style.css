@@ -1,0 +1,16 @@
+body {
+    background-color: #98c9e2;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    div {
+        background-color: #f5f5f5;
+        margin: 10px;
+        padding: 20px;
+        font-size: 24px;
+    }
+}
