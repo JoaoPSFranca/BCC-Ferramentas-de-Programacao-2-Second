@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,400&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.containner {
+    width: 1080px;
+    margin: 0px auto;
+}
+
+header {
+    background-color: #2563eb;
+    width: 100%;
+    color: white;
+    margin-bottom: 30px;
+
+    nav {
+        display: flex;
+        padding-top: 25px;
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+
+            li {
+                margin: 0px 15px;
+                text-decoration: none;
+            }
+
+            li:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .textPrincipal {
+        padding: 64px 0px;
+
+        p {
+            color: #f5f5f5;
+        }
+
+        button {
+            border: none;
+            color: #2563eb;
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        button:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+    }
+}
+
+main {
+    .sobre {
+        ul {
+            margin: 15px 0px;
+        }
+
+        margin-bottom: 64px;
+    }
+
+    .difs {
+        margin-bottom: 20px;
+        
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .diferenciais {
+            display: flex;
+            justify-content: space-between;
+
+            article {
+                width: 32.5%;
+                padding: 15px;
+                background-color: #f1f5f9;
+                border-radius: 5px;
+            }
+
+            article:hover {
+                background-color: #f5f5f5;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .deps {
+        background-color: #e2e8f0;
+        width: 100%;
+        padding: 40px 0px;
+        margin: 30px 0px;
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .depoimentos {
+            display: flex;
+            justify-content: space-between;
+
+            article {
+                width: 49%;
+                padding: 15px;
+                background-color: #f1f5f9;
+                border-radius: 5px;
+            }
+
+            article:hover {
+                background-color: #f5f5f5;
+                cursor: pointer;
+            }
+        }
+    }
+
+    form {
+        width: 100%;
+        max-width: 480px;
+
+        input, textarea {
+            display: block;
+            width: 100%;
+            margin: 10px 0px;
+            border-radius: 5px;
+            padding: 7px;
+            font-size: 1rem;
+            border: 2px solid #f1f5f9;
+        }
+
+        /* input:focus, textarea:focus {
+            outline: none;
+            border: 3px solid #2563eb;
+        } */
+
+        button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            color: white;
+            background-color: #2563eb;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #1e40af;
+            cursor: pointer;
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    background-color: #0f172a;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    color: white;
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .containner {
+        width: 100%;
+        padding: 0px 35px;
+    }
+
+    header {
+        nav {
+            flex-wrap: wrap;
+            align-items: center;
+
+            p {
+                text-align: center;
+                width: 100%;
+            }
+
+            ul {
+                margin: 15px auto;
+                flex-wrap: wrap;
+            }
+        }
+    }
+
+    main {
+        .difs {
+            .diferenciais {
+                flex-wrap: wrap;
+
+                article {
+                    width: 100%;
+                    margin: 5px 0px;
+                }
+            }
+        }
+
+        .deps {
+            .depoimentos {
+                flex-wrap: wrap;
+                
+                article {
+                    width: 100%;
+                    margin: 5px 0px;
+                }
+            }
+        }
+        
+        form {
+            max-width: 627px;
+        }
+    }
+}
+
+@media screen and (max-width: 1080px) and (min-width: 768px) {
+    .containner {
+        width: 100%;
+        padding: 0px 35px;
+    }
+}
