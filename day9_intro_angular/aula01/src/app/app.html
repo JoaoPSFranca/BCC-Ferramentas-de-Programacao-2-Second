@@ -1,0 +1,27 @@
+<h1>{{ title }}</h1>
+<h3>{{ getSubTitle() }}</h3>
+
+<button (click)="show()">aperta ai</button>
+
+<p><b>
+  Contador:
+</b> {{count}}</p>
+
+<button (click)="upCount()">up</button>
+<button (click)="downCount()">down</button>
+<br>
+
+<ol>
+  @for (item of names; track item) {
+    <li (click)="removeClicked($index)">
+      {{ item }}
+    </li>
+  } @empty {
+    <p>Nenhum Item na Lista. </p>
+  }
+</ol>
+
+<button (click)="removeFirst()">remove first</button>
+<button (click)="removeLast()">remove last</button>
+
+<router-outlet/>
