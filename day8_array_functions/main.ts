@@ -37,3 +37,4 @@ const tem3 = numeros.includes(3);
 // pop: remove do final
 // shift: remove do inicio
 // splice: remove uma determinada quantidade de elementos a partir de uma posição splice(posição, quantidade)
+// splice também pode adicionar splice(posicao, quantidade_removida, item_adicionado, item_adicionado, ...)
