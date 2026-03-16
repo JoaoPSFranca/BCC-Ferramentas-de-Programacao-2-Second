@@ -14,7 +14,7 @@
 <br>
 
 <ol>
-  @for (item of names; track item) {
+  @for (item of names; track $index) {
     <li (click)="removeClicked($index)">
       {{ item }}
     </li>
@@ -25,5 +25,19 @@
 
 <button (click)="removeFirst()">remove first</button>
 <button (click)="removeLast()">remove last</button>
+
+<!-- @for (phone of pessoa.phone_numbers; track $index) {
+  <ul>
+    <li>
+      Tipo: {{ phone.type }}
+    </li>
+    <li>
+      Numero: {{ phone.number }}
+    </li>
+  </ul>
+
+} @empty {
+  <p>Nenhum Item na Lista. </p>
+} -->
 
 <router-outlet/>
