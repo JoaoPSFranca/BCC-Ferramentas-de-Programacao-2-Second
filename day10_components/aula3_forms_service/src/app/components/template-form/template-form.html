@@ -1,0 +1,32 @@
+<p>template-form works!</p>
+
+<form #f="ngForm" (ngSubmit)="salvar(f)">
+    <div>
+        nome:
+        <input type="text" name="nome" [(ngModel)]="pessoa.nome" required minlength="3" #nomeInput="ngModel" />
+        email:
+        <input type="text" name="email" [(ngModel)]="pessoa.email" required #emailInput="ngModel" />
+        <br />
+
+        <!-- Serve para verificar erro específico (tirar o [] caso queira todos) -->
+        <!-- <p>
+            {{ nomeInput.errors?.['required'] | json}}
+        </p> -->
+
+        <!-- ou pode usar assim: -->
+        <!-- touched serve para ver se a pessoa já clicou no item -->
+        @if (nomeInput.errors?.['required'] && nomeInput.touched) {
+            <p>Nome é obrigatório</p>
+        }
+
+        @if (nomeInput.errors?.['minlength']) {
+            <p>Informe pelo menos 3 caracteres para o Nome.</p>
+        }
+
+        @if (emailInput.errors?.['required'] && emailInput.touched) {
+            <p>Nome é obrigatório</p>
+        }
+
+        <button type="submit" [disabled]="f.invalid">salvar</button>
+    </div>
+</form>
