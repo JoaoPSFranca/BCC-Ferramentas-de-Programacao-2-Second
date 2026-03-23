@@ -3,7 +3,7 @@
 <form #f="ngForm" (ngSubmit)="salvar(f)">
     <div>
         nome:
-        <input type="text" name="nome" [(ngModel)]="pessoa.nome" required minlength="3" #nomeInput="ngModel" />
+        <input type="text" name="nome" [(ngModel)]="pessoa.nome" required minlength="3" #nomeInput="ngModel" /> <br>
         email:
         <input type="text" name="email" [(ngModel)]="pessoa.email" required #emailInput="ngModel" />
         <br />

@@ -1,0 +1,27 @@
+<p>reactive-form works!</p>
+
+<form [formGroup]="form" (ngSubmit)="executar()">
+    <label>
+        Nome:
+        <input type="text" formControlName="nome">
+    </label><br/>
+
+    @if(form.controls.nome.errors) {
+        @if (form.controls.nome.hasError('required')) {
+            <p>Tem erro de required</p>
+        }
+        
+        @if (form.controls.nome.errors['required']) {
+            <p>O nome é obrigatório</p>
+        } @else if (form.controls.nome.errors['minlength']) {
+            <p>Informar pelo menos 5 caracteres</p>
+        }
+    }
+
+    <label>
+        Email:
+        <input type="text" formControlName="email">
+    </label><br/>
+
+    <button type="submit">Enviar</button>
+</form>

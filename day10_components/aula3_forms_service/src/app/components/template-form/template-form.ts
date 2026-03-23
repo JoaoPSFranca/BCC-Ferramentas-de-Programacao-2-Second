@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Pessoa } from '../../models/pessoa.model';
@@ -6,7 +5,7 @@ import { PessoaService } from '../../services/pessoa.service';
 
 @Component({
   selector: 'app-template-form',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule],
   templateUrl: './template-form.html',
   styleUrl: './template-form.css',
 })
