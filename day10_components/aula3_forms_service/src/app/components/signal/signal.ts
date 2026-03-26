@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 @Component({
   selector: 'app-signal',
@@ -40,7 +40,11 @@ export class Signal {
         nome: atual.nome.toUpperCase()
       }
     });
-
   }
+
+  protected exemeploComputed = computed(() => {
+    console.log("Computed foi executado");
+    return this.exemploCount() * 2;
+  });
 
 }
