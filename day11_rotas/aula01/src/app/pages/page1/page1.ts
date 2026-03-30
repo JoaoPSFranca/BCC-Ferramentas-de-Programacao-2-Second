@@ -18,5 +18,8 @@ export class Page1 {
     };
 
     this.router.navigate(['/page2/123'], { state: pessoa });
+
+    // Query Params
+    // https://localhost:4200/page2?
   }
 }

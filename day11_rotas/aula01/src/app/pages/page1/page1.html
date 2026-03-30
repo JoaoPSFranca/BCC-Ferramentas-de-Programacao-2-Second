@@ -1,4 +1,4 @@
 <p>page1 works!</p>
 
-<button routerLink="/page2">Ir para página 2</button>
+<button routerLink="/page2" [queryParams]="{nome: 'joao', idade: 22}">Ir para página 2</button>
 <button (click)="redirecionar()">Redirecionar para página 2</button>
