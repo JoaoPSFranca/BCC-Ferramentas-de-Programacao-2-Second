@@ -1,0 +1,9 @@
+<h1>Http Client - Posts</h1>
+
+<ol>
+  @for (post of posts(); track post.id) {
+    <a href="posts/{{ post.id }}/coments" style="text-decoration: none; color: black">
+      <li>{{ post.title }}</li>
+    </a>
+  }
+</ol>

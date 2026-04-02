@@ -1,0 +1,9 @@
+<h1>Http Client - Coments</h1>
+
+<ol>
+    @for (coment of coments(); track coment.id) {
+        <li>{{ coment.name }}</li>
+    }
+</ol>
+
+<button (click)="NavigateBack()">Voltar</button>
