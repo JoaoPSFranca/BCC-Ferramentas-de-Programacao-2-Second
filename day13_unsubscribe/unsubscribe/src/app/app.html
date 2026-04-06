@@ -1,0 +1,9 @@
+<button (click)="mostrar = !mostrar">
+  Mostrar / Esconder Componente Filho
+</button>
+
+@if(mostrar) {
+  <app-filho></app-filho>
+}
+
+<router-outlet />
