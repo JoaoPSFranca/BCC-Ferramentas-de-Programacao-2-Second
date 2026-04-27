@@ -1,0 +1,57 @@
+<br>
+
+<div class="card">
+  <p-table
+    [value]="(vendas$ | async)!"
+    [paginator]="true" [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    stripedRows
+  >
+
+    <ng-template #caption>
+      <div class="flex items-center justify-between">
+        <span class="text-xl font-bold">Lista de Vendas</span>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="codigo" style="width:20%">
+          <div class="flex items-center gap-2">
+            Codigo
+            <p-sortIcon field="codigo" />
+          </div>
+        </th>
+        <th pSortableColumn="data" style="width:20%">
+          <div class="flex items-center gap-2">
+            Data
+            <p-sortIcon field="data" />
+          </div>
+        </th>
+        <th pSortableColumn="cliente" style="width:20%">
+          <div class="flex items-center gap-2">
+            Cliente
+            <p-sortIcon field="cliente" />
+          </div>
+        </th>
+        <th>Itens</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-venda>
+      <tr>
+        <td>{{ venda.codigo }}</td>
+        <td>{{ venda.data | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ venda.cliente }}</td>
+        <td>
+          @for (item of venda.itens; track item) {
+            {{ item.nome_produto }} @if (!$last) {, }
+          }
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>

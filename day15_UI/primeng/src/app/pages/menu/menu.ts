@@ -18,39 +18,13 @@ export class Menu implements OnInit {
       {
         label: 'Home',
         icon: 'pi pi-home',
-        command: () => {
-          console.log('Home');
-        }
+        routerLink: '/',
       },
       {
-        label: 'Features',
-        icon: 'pi pi-star',
-      },
-      {
-        label: 'Projects',
-        icon: 'pi pi-search',
-        badge: '3',
-        items: [
-          {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-            shortcut: '⌘+S',
-          },
-          {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-            shortcut: '⌘+B',
-          },
-          {
-            separator: true,
-          },
-          {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-            shortcut: '⌘+U',
-          },
-        ],
-      },
+        label: 'Vendas',
+        icon: 'pi pi-shop',
+        routerLink: '/vendas',
+      }
     ];
   }
 }

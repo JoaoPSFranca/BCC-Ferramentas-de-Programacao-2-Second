@@ -2,11 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/menu',
+    path: 'vendas',
+    loadComponent: () => import('./pages/vendas/vendas').then((m) => m.Vendas),
   },
-  {
-    path: 'menu',
-    loadComponent: () => import('./pages/menu/menu').then((m) => m.Menu),
-  }
 ];
