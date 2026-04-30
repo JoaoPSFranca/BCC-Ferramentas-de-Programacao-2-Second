@@ -2,38 +2,75 @@
 
 <div class="card">
   <p-table
+    #dt
     [value]="(vendas$ | async)!"
     [paginator]="true" [rows]="5"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    sortMode="multiple"
+    [multiSortMeta]="[ { field: 'cliente', order: 1 }, { field: 'data', order: -1 }]"
     [tableStyle]="{ 'min-width': '50rem' }"
+    [globalFilterFields]="['codigo', 'data', 'cliente']"
+    selectionMode="single" [(selection)]="selectedVenda"
+    (selectionChange)="test()"
     stripedRows
   >
 
     <ng-template #caption>
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold">Lista de Vendas</span>
+
+        <p-icon-field iconPosition="left" class="ml-auto">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+        </p-icon-field>
       </div>
     </ng-template>
 
     <ng-template #header>
       <tr>
         <th pSortableColumn="codigo" style="width:20%">
-          <div class="flex items-center gap-2">
-            Codigo
-            <p-sortIcon field="codigo" />
+          <div class="flex items-center gap-2 justify-between">
+            <div>
+              Codigo
+              <p-sortIcon field="codigo" />
+            </div>
+
+            <p-columnFilter
+              type="text"
+              field="codigo"
+              display="menu"
+            />
           </div>
         </th>
         <th pSortableColumn="data" style="width:20%">
-          <div class="flex items-center gap-2">
-            Data
-            <p-sortIcon field="data" />
+          <div class="flex items-center gap-2 justify-between">
+            <div>
+              Data
+              <p-sortIcon field="data" />
+            </div>
+
+            <p-columnFilter
+              type="text"
+              field="data"
+              display="menu"
+            />
           </div>
         </th>
         <th pSortableColumn="cliente" style="width:20%">
-          <div class="flex items-center gap-2">
-            Cliente
-            <p-sortIcon field="cliente" />
+          <div class="flex items-center gap-2 justify-between">
+            <div>
+              Cliente
+              <p-sortIcon field="cliente" />
+            </div>
+
+            <p-columnFilter
+              type="text"
+              field="cliente"
+              display="menu"
+            />
           </div>
         </th>
         <th>Itens</th>
@@ -41,7 +78,7 @@
     </ng-template>
 
     <ng-template #body let-venda>
-      <tr>
+      <tr [pSelectableRow]="venda">
         <td>{{ venda.codigo }}</td>
         <td>{{ venda.data | date: 'dd/MM/yyyy' }}</td>
         <td>{{ venda.cliente }}</td>
