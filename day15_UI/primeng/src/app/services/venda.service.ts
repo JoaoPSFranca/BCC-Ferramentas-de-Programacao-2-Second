@@ -13,4 +13,8 @@ export class VendaService {
   public getAll() {
     return this.http.get<Venda[]>(`${this.baseUrl}/vendas`);
   }
+
+  public remove(id: number) {
+    return this.http.delete(`${this.baseUrl}/vendas/${id}`);
+  }
 }
