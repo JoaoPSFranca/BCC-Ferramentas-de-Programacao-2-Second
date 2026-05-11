@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "email": "admin@ifsp.edu.br",
+      "password": "123",
+      "id": 1
+    },
+    {
+      "email": "jota@gmail.com",
+      "password": "$2a$10$/qhDXICgwPXqmK9uSNK9cOgK2myG0WYASr8Oo4YSbnqbVU6CMeTMq",
+      "id": 2
+    },
+    {
+      "email": "asdas@gmail",
+      "password": "$2a$10$QlLUGMe.PL5yuBKq6gEvxOb1MbfD4BRTmOi5JKQsBdH320J2AoGNu",
+      "id": 3
+    },
+    {
+      "email": "abc@gmail",
+      "password": "$2a$10$g7HIfimSaNnAIfldhfow9OvZqvdFX/xu6g.530.OoZ2K/0at9pyVy",
+      "id": 4
+    },
+    {
+      "email": "abcd@gmail.com",
+      "password": "$2a$10$kRSk/Dmqcpg3Gxp.hvCreO/Kn7fTvCDcsRr6Qyl1PxVTB5h47sIBe",
+      "id": 5
+    },
+    {
+      "email": "abcde@gmail.com",
+      "password": "$2a$10$dP4YtzXw314.HM0xf/2Ge.vxVqZOUiGqRuC1e2Ry7.L62tj8ktPiy",
+      "id": 6
+    }
+  ],
+  "atividades": [
+    {
+      "codigo": 1,
+      "data": "2026-05-15",
+      "titulo": "Campeonato de Programação",
+      "palestrante": "Prof. Renan",
+      "inscritos": [
+        {
+          "matricula": 1010,
+          "nome": "Alice",
+          "curso": "TADS"
+        },
+        {
+          "matricula": 1011,
+          "nome": "Carlos",
+          "curso": "TADS"
+        }
+      ]
+    }
+  ]
+}
