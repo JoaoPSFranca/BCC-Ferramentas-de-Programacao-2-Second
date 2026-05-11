@@ -1,0 +1,88 @@
+<form [formGroup]="form" id="form" (ngSubmit)="createTarefa()">
+  <div>
+    <label for="titulo" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">
+      Titulo
+    </label> <br>
+
+    <input
+      pInputText
+      id="titulo"
+      type="text"
+      placeholder="Ensira o título da tarefa"
+      class="w-full md:w-120 mb-8"
+      formControlName="titulo"
+      autocomplete="off"
+    /> <br>
+
+    <label for="descricao" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">
+      Descrição
+    </label> <br>
+
+    <input
+      pInputText
+      id="descricao"
+      type="text"
+      placeholder="Ensira a descrição da tarefa"
+      class="w-full md:w-120 mb-8"
+      formControlName="descricao"
+      autocomplete="off"
+    /> <br>
+
+    <label for="prioridade" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">
+      Prioridade
+    </label>
+
+<!--    <input-->
+<!--      pInputText-->
+<!--      id="prioridade"-->
+<!--      type="text"-->
+<!--      placeholder="Ensira a Prioridade: Baixa, Média, Alta"-->
+<!--      class="w-full md:w-120 mb-8"-->
+<!--      formControlName="prioridade"-->
+<!--      autocomplete="off"-->
+<!--    />-->
+
+    <p-listbox id="prioridade" [options]="prioridades" formControlName="prioridade" class="w-full md:w-56"></p-listbox>
+
+    <label for="data" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">
+      Data Limite
+    </label> <br>
+
+    <input
+      pInputText
+      id="data"
+      type="text"
+      placeholder="Ensira a Data Limite"
+      class="w-full md:w-120 mb-8"
+      formControlName="data"
+      autocomplete="off"
+    /> <br>
+
+    <p-button id="btnSalvar" label="Salvar" type="submit"></p-button>
+  </div>
+</form>
+
+<hr>
+
+<div class="card">
+  <p-table [value]="tarefas" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Titulo</th>
+        <th>Prioridade</th>
+        <th>Data Limite</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-tarefa>
+      <tr>
+        <td>{{ tarefa.titulo }}</td>
+        <td>{{ tarefa.prioridade }}</td>
+        <td>{{ tarefa.data | date }}</td>
+        <td>
+          <p-button id="btnRemover" label="Remove" (click)="deleteTarefa(tarefa.id)" rounded></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

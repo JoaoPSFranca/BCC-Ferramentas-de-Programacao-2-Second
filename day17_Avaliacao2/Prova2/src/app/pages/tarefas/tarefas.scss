@@ -1,0 +1,19 @@
+#form {
+  width: 75%;
+  margin: 0 auto;
+  min-width: 400px;
+  max-width: 550px;
+}
+
+#titulo, #descricao, #prioridade, #data {
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid #52525b;
+  width: 100%;
+}
+
+#btnSalvar {
+  width: 100%;
+}
