@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<org.mapstruct.version>1.6.3</org.mapstruct.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -78,6 +79,13 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -105,7 +113,14 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
 							<annotationProcessorPaths>
+								<path>
+									<groupId>org.mapstruct</groupId>
+									<artifactId>mapstruct-processor</artifactId>
+									<version>${org.mapstruct.version}</version>
+								</path>
 								<path>
 									<groupId>org.projectlombok</groupId>
 									<artifactId>lombok</artifactId>
@@ -129,6 +144,11 @@
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<source>21</source>
+					<target>21</target>
+					<compilerArgs>--enable-preview</compilerArgs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

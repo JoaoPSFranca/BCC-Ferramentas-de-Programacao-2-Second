@@ -1,6 +1,7 @@
 package br.edu.ifsp.pep.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,5 +20,6 @@ public class Curso implements Serializable {
     private long id;
 
     @Column(name="nome")
-    private String nome;    
+    private String nome;
+
 }
