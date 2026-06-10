@@ -55,4 +55,18 @@ public class ProdutoController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoDTO> update(@PathVariable long id, @RequestBody @Valid ProdutoDTO produtoDTO) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+        Produto p = mapper.toProduto(produtoDTO);
+
+        if (produto.isPresent()) {
+            p.setCodigo(id);
+            p = produtoRepository.save(p);
+            return ResponseEntity.ok().body(mapper.toProdutoDTO(p));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }

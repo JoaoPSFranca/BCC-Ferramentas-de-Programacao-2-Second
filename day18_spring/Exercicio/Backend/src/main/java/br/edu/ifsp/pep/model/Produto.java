@@ -5,7 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -34,13 +33,13 @@ public class Produto {
 
     @Enumerated(EnumType.STRING)
     @Column(name="status", nullable = false)
-    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
-    @JoinTable(
-            name="status",
-            joinColumns = {
-                    @JoinColumn(name="codigo")
-            }
-    )
+//    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name="status",
+//            joinColumns = {
+//                    @JoinColumn(name="codigo")
+//            }
+//    )
     private Status status;
 
 }
