@@ -1,0 +1,22 @@
+<p>Tabela</p>
+
+<table>
+  <thead>
+    <tr>
+      <td><strong>Código</strong></td>
+      <td><strong>Cliente</strong></td>
+      <td><strong>Data</strong></td>
+      <td><strong>Ações</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of vendas(); track item.codigo) {
+      <tr>
+        <td>{{ item.codigo }}</td>
+        <td>{{ item.cliente }}</td>
+        <td>{{ item.data | date: 'dd/MM/yyyy'}}</td>
+        <td><span (click)="removerClick(item)">Remover</span></td>
+      </tr>
+    }
+  </tbody>
+</table>

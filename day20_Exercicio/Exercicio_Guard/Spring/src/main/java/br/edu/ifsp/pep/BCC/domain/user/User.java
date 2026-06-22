@@ -1,4 +1,4 @@
-package br.edu.ifsp.pep.auth.domain.user;
+package br.edu.ifsp.pep.BCC.domain.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
