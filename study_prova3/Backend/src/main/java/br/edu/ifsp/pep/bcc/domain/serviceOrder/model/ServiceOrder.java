@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -29,7 +29,7 @@ public class ServiceOrder {
     private String vehiclePlate;
 
     @Column(name="os_dataAbertura")
-    private LocalDateTime openingDate;
+    private LocalDate openingDate;
 
     @Column(name="os_status")
     private Status status;
@@ -41,10 +41,10 @@ public class ServiceOrder {
     @JoinColumn(name = "us_id")
     private User user;
 
-    @OneToMany(mappedBy = "serviceOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "serviceOrder")
     private List<ServiceOrderItem> items;
 
-    public ServiceOrder(String vehiclePlate, LocalDateTime openingDate, Status status, BigDecimal totalValue, User user) {
+    public ServiceOrder(String vehiclePlate, LocalDate openingDate, Status status, BigDecimal totalValue, User user) {
         this.vehiclePlate = vehiclePlate;
         this.openingDate = openingDate;
         this.status = status;

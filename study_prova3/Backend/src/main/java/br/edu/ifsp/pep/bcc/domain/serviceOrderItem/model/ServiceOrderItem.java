@@ -45,4 +45,9 @@ public class ServiceOrderItem {
         this.serviceModel = serviceModel;
         this.serviceOrder = serviceOrder;
     }
+
+    public ServiceOrderItem(int quantityHours, ServiceModel serviceModel) {
+        this.quantityHours = quantityHours;
+        this.serviceModel = serviceModel;
+    }
 }

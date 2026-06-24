@@ -31,8 +31,7 @@ public class ServiceModel {
     @Column(name="ser_precoBase")
     private BigDecimal basePrice;
 
-    public ServiceModel(String description, BigDecimal basePrice) {
-        this.description = description;
-        this.basePrice = basePrice;
+    public ServiceModel(Long id) {
+        this.id = id;
     }
 }

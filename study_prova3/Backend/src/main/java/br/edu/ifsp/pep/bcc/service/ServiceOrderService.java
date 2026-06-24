@@ -25,7 +25,7 @@ public class ServiceOrderService {
     @Autowired
     private ServiceOrderItemRepository serviceOrderItemRepository;
 
-    public void openNewSO(ServiceOrder newSo) {
+    public ServiceOrder openNewSO(ServiceOrder newSo) {
         User capturedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (capturedUser != null) {
@@ -34,7 +34,7 @@ public class ServiceOrderService {
             Double total = 0.0;
 
             for (ServiceOrderItem item : newSo.getItems()) {
-                ServiceModel serviceModel = serviceRepository.getReferenceById(item.getServiceModel().getId());
+                ServiceModel serviceModel = serviceRepository.getById(item.getServiceModel().getId());
                 item.setSubtotal(serviceModel.getBasePrice().multiply(BigDecimal.valueOf(item.getQuantityHours())));
                 total += item.getSubtotal().doubleValue();
             }
@@ -47,6 +47,8 @@ public class ServiceOrderService {
                 item.setServiceOrder(newSo);
 
             this.serviceOrderItemRepository.saveAll(newSo.getItems());
+
+            return newSo;
         } else {
             throw new RuntimeException("User not authenticated");
         }
