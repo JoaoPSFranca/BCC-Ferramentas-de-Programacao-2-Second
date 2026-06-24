@@ -27,27 +27,31 @@ public class ServiceOrderController {
     @Autowired
     private ServiceOrderService serviceOrderService;
 
+    public ServiceOrderDTO serviceOrderToServiceOrderDTO(ServiceOrder serviceOrder) {
+        return new ServiceOrderDTO(
+                serviceOrder.getVehiclePlate(),
+                serviceOrder.getOpeningDate(),
+                serviceOrder.getStatus(),
+                serviceOrder.getTotalValue(),
+                serviceOrder.getUser().getLogin(),
+                serviceOrder.getItems().stream()
+                        .map(item -> new ServiceOrderItemDTO(
+                                item.getQuantityHours(),
+                                item.getSubtotal(),
+                                new ServiceDTO(
+                                        item.getServiceModel().getId(),
+                                        item.getServiceModel().getDescription(),
+                                        item.getServiceModel().getBasePrice()
+                                )
+                        )).toList()
+        );
+    }
+
     @GetMapping("")
     public ResponseEntity<List<ServiceOrderDTO>> getAll() {
         List<ServiceOrderDTO> serviceOrders = serviceOrderRepository.findAll()
                 .stream()
-                .map(serviceOrder -> new ServiceOrderDTO(
-                        serviceOrder.getVehiclePlate(),
-                        serviceOrder.getOpeningDate(),
-                        serviceOrder.getStatus(),
-                        serviceOrder.getTotalValue(),
-                        serviceOrder.getUser().getLogin(),
-                        serviceOrder.getItems().stream()
-                                .map(item -> new ServiceOrderItemDTO(
-                                        item.getQuantityHours(),
-                                        item.getSubtotal(),
-                                        new ServiceDTO(
-                                                item.getServiceModel().getId(),
-                                                item.getServiceModel().getDescription(),
-                                                item.getServiceModel().getBasePrice()
-                                        )
-                                )).toList()
-                )).toList();
+                .map(this::serviceOrderToServiceOrderDTO).toList();
 
         return ResponseEntity.ok(serviceOrders);
     }
@@ -69,24 +73,19 @@ public class ServiceOrderController {
 
         newSo = serviceOrderService.openNewSO(newSo);
 
-        ServiceOrderDTO serviceOrderDTO = new ServiceOrderDTO(
-                newSo.getVehiclePlate(),
-                newSo.getOpeningDate(),
-                newSo.getStatus(),
-                newSo.getTotalValue(),
-                newSo.getUser().getLogin(),
-                newSo.getItems().stream()
-                        .map(item -> new ServiceOrderItemDTO(
-                                item.getQuantityHours(),
-                                item.getSubtotal(),
-                                new ServiceDTO(
-                                        item.getServiceModel().getId(),
-                                        item.getServiceModel().getDescription(),
-                                        item.getServiceModel().getBasePrice()
-                                )
-                        )).toList()
-        );
+        ServiceOrderDTO serviceOrderDTO = serviceOrderToServiceOrderDTO(newSo);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceOrderDTO);
+    }
+
+    @PutMapping("")
+    public ResponseEntity<ServiceOrderDTO> updateStatus(@RequestBody @Valid ServiceOrderDTO serviceOrderDTO) {
+        ServiceOrder serviceOrder = this.serviceOrderRepository.findByVehiclePlateAndOpeningDate(serviceOrderDTO.vehiclePlate(), serviceOrderDTO.openingDate());
+
+        serviceOrder.setStatus(serviceOrderDTO.status());
+
+        this.serviceOrderRepository.save(serviceOrder);
+
+        return ResponseEntity.ok(serviceOrderToServiceOrderDTO(serviceOrder));
     }
 }
