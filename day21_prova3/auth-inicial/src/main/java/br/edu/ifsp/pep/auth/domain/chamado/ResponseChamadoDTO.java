@@ -1,0 +1,20 @@
+package br.edu.ifsp.pep.auth.domain.chamado;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
+
+public record ResponseChamadoDTO(
+    @NotBlank
+    String titulo,
+
+    @NotNull
+    LocalDate dataAbertura,
+
+    @NotNull
+    Status status,
+
+    @NotNull
+    Prioridade prioridade
+) { }
