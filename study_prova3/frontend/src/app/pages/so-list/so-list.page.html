@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pátio de Oficina</ion-title>
+    <ion-button slot="end" color="light" (click)="openForm()">+ Abrir Nova OS</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p-table #dt [value]="osService.osList()" [rows]="5" [paginator]="true"
+           [globalFilterFields]="['vehiclePlate', 'user', 'status']"
+           styleClass="p-datatable-gridlines p-datatable-striped">
+
+    <ng-template #caption>
+      <div class="flex items-center justify-between">
+        <span class="text-xl font-bold">Ordens Registradas</span>
+        <p-iconfield iconPosition="left">
+          <p-inputicon><i class="pi pi-search"></i></p-inputicon>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Placa ou Mecânico..." />
+        </p-iconfield>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="id">ID <p-sortIcon field="id"/></th>
+        <th pSortableColumn="vehiclePlate">Placa <p-sortIcon field="vehiclePlate"/></th>
+        <th pSortableColumn="openingDate">Data <p-sortIcon field="openingDate"/></th>
+        <th pSortableColumn="user">Responsável <p-sortIcon field="user"/></th>
+        <th pSortableColumn="status">Status <p-sortIcon field="status"/></th>
+        <th>Orçamento</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-os>
+      <tr>
+        <td class="font-bold">{{ os.id }}</td>
+        <td class="text-blue-600 font-mono font-bold">{{ os.vehiclePlate }}</td>
+        <td>{{ os.openingDate | date:'dd/MM/yyyy' }}</td>
+        <td>{{ os.user }}</td>
+        <td>
+          <span [class]="os.status === 'OPEN' ? 'bg-amber-100 text-amber-800 px-2 py-1 rounded font-bold' : 'bg-emerald-100 text-emerald-800 px-2 py-1 rounded font-bold'">
+            {{ os.status }}
+          </span>
+        </td>
+        <td class="font-bold text-green-700">R$ {{ os.totalValue }}</td>
+        <td class="flex gap-2">
+          <ion-button size="small" color="medium" (click)="inspecionar(os)">Ver Ficha</ion-button>
+          @if (os.status === 'OPEN') {
+            <ion-button size="small" color="success" (click)="save(os)">Concluir</ion-button>
+          }
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ion-content>

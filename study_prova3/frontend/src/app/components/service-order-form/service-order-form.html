@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-button slot="start" fill="clear" color="light" (click)="voltar()">Voltar</ion-button>
+    <ion-title>{{ modoInspecao ? 'Ficha de Inspeção' : 'Abertura de OS' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding max-w-2xl mx-auto">
+
+  <div class="p-4 bg-gray-50 rounded-lg border mb-6">
+    <h2 class="text-lg font-bold mb-4 text-gray-700">1. Identificação do Veículo</h2>
+    <form [formGroup]="formOS" class="grid grid-cols-2 gap-4">
+      <ion-item>
+        <ion-label position="stacked">Placa (AAA-0000 ou Mercosul)</ion-label>
+        <ion-input formControlName="vehiclePlate" placeholder="ABC-1234"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Data de Entrada</ion-label>
+        <ion-input formControlName="openingDate" type="date"></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  @if (!modoInspecao) {
+    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-6">
+      <h2 class="text-lg font-bold mb-4 text-blue-900">2. Adicionar Serviço ao Orçamento</h2>
+      <form [formGroup]="formItem" (ngSubmit)="colocarNoCarrinho()" class="flex gap-4 items-end">
+        <ion-item class="flex-1">
+          <ion-label position="stacked">Selecione o Catálogo</ion-label>
+          <ion-select formControlName="serviceId" placeholder="Escolha um serviço">
+            @for (servico of osService.servicosCatalogo(); track servico.id) {
+              <ion-select-option [value]="servico.id">
+                {{ servico.description }} - R$ {{ servico.basePrice }}/h
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="w-32">
+          <ion-label position="stacked">Horas</ion-label>
+          <ion-input formControlName="quantityHours" type="number" min="1"></ion-input>
+        </ion-item>
+
+        <ion-button type="submit" color="primary" [disabled]="formItem.invalid">+ Incluir</ion-button>
+      </form>
+    </div>
+  }
+
+  <div class="p-4 bg-white rounded-lg border">
+    <h2 class="text-lg font-bold mb-4 text-gray-700">3. Detalhamento dos Serviços</h2>
+
+    <ion-list>
+      @if (modoInspecao) {
+        @for (item of fichaCadastrada.items; track $index) {
+          <ion-item>
+            <ion-label>
+              <h3 class="font-bold">{{ item.service.description }}</h3>
+              <p>Trabalho: {{ item.quantityHours }} horas</p>
+            </ion-label>
+            <span slot="end" class="font-mono font-bold text-green-700">R$ {{ item.subtotal }}</span>
+          </ion-item>
+        }
+      } @else {
+        @for (item of listaItensAdicionados; track $index) {
+          <ion-item>
+            <ion-label>
+              <h3 class="font-bold">{{ item.descricao }}</h3>
+              <p>{{ item.quantityHours }}h (Base: R$ {{ item.precoBase }})</p>
+            </ion-label>
+            <ion-button slot="end" color="danger" fill="clear" (click)="removerDoCarrinho($index)">
+              Excluir
+            </ion-button>
+          </ion-item>
+        }
+
+        @if (listaItensAdicionados.length === 0) {
+          <p class="text-gray-400 italic text-center py-4">Nenhum serviço adicionado ainda.</p>
+        }
+      }
+    </ion-list>
+  </div>
+
+  @if (!modoInspecao) {
+    <div class="mt-8">
+      <ion-button expand="block" color="success" size="large" (click)="dispararOrdem()">
+        Gravar e Emitir Ordem de Serviço
+      </ion-button>
+    </div>
+  }
+
+</ion-content>

@@ -4,6 +4,7 @@ import br.edu.ifsp.pep.bcc.domain.service.dto.ServiceDTO;
 import br.edu.ifsp.pep.bcc.domain.service.model.ServiceModel;
 import br.edu.ifsp.pep.bcc.domain.serviceOrder.dto.RegisterServiceOrderDTO;
 import br.edu.ifsp.pep.bcc.domain.serviceOrder.dto.ServiceOrderDTO;
+import br.edu.ifsp.pep.bcc.domain.serviceOrder.dto.UpdateStatusDTO;
 import br.edu.ifsp.pep.bcc.domain.serviceOrder.model.ServiceOrder;
 import br.edu.ifsp.pep.bcc.domain.serviceOrderItem.dto.ServiceOrderItemDTO;
 import br.edu.ifsp.pep.bcc.domain.serviceOrderItem.model.ServiceOrderItem;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class ServiceOrderController {
 
     public ServiceOrderDTO serviceOrderToServiceOrderDTO(ServiceOrder serviceOrder) {
         return new ServiceOrderDTO(
+                serviceOrder.getId(),
                 serviceOrder.getVehiclePlate(),
                 serviceOrder.getOpeningDate(),
                 serviceOrder.getStatus(),
@@ -78,14 +81,18 @@ public class ServiceOrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceOrderDTO);
     }
 
-    @PutMapping("")
-    public ResponseEntity<ServiceOrderDTO> updateStatus(@RequestBody @Valid ServiceOrderDTO serviceOrderDTO) {
-        ServiceOrder serviceOrder = this.serviceOrderRepository.findByVehiclePlateAndOpeningDate(serviceOrderDTO.vehiclePlate(), serviceOrderDTO.openingDate());
+    @PutMapping("/{id}/status")
+    public ResponseEntity<ServiceOrderDTO> updateStatus(
+            @PathVariable Long id,
+            @RequestBody @Valid UpdateStatusDTO dto) {
 
-        serviceOrder.setStatus(serviceOrderDTO.status());
+        ServiceOrder os = serviceOrderRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "OS não encontrada"));
 
-        this.serviceOrderRepository.save(serviceOrder);
+        os.setStatus(dto.status());
 
-        return ResponseEntity.ok(serviceOrderToServiceOrderDTO(serviceOrder));
+        serviceOrderRepository.save(os);
+
+        return ResponseEntity.ok(serviceOrderToServiceOrderDTO(os));
     }
 }
